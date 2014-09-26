@@ -67,7 +67,7 @@ class Client(object):
                 if not p['optional']:
                     raise RpcError('arg {} is required'.format(name))
         if len(unchecked_args) > 0:
-            RpcError('Unknown args: ' + str(unchecked_args))
+            raise RpcError('Unknown args: ' + str(unchecked_args))
         
         headers = {'content-type': 'application/json'}
         payload = {
