@@ -2,8 +2,9 @@
 # https://github.com/yuichi1004/tiny-pyj
 import re
 import json
-import random
 import urllib2
+import urllib
+import base64
 
 class RpcMethod(object):
     def __init__(self, client, method, service):
@@ -68,18 +69,35 @@ class Client(object):
                     raise RpcError('arg {} is required'.format(name))
         if len(unchecked_args) > 0:
             raise RpcError('Unknown args: ' + str(unchecked_args))
+
+        transport = self.smd['transport']
+        if 'transport' in service:
+            transport = service['transport']
         
         headers = {'content-type': 'application/json'}
         payload = {
             'method': method,
             'jsonrpc': '2.0',
-            'id': random.randint(1, 100000),
+            'id': 1,
         }
-        if (checked_args is not None):
-            payload['params'] = checked_args 
         
         url = self.host + self.smd['target']
-        req = urllib2.Request(url, json.dumps(payload), headers)
+        req = None
+        if transport == 'POST':
+            if (checked_args is not None):
+                payload['params'] = checked_args 
+            req = urllib2.Request(url, json.dumps(payload), headers)
+        elif transport == 'GET':
+            if (checked_args is not None):
+                paramstr = json.dumps(checked_args)
+                paramstr =  base64.b64encode(paramstr)
+                payload['params'] = paramstr
+            query = urllib.urlencode(payload)
+            print query
+            req = urllib2.Request(url + '?' + urllib.urlencode(payload),
+                    None, headers)
+        else:
+            raise RpcError('Unknown transport: ' + transport)
         resp = self.url_opener.open(req)
         j = json.loads(resp.read())
         if ('error' in j):
