@@ -17,6 +17,10 @@ class RpcError(Exception):
     def __init__(self, msg):
         super(RpcError, self).__init__(msg)
 
+class RpcValidationError(RpcError): 
+    def __init__(self, msg):
+        super(RpcValidationError, self).__init__(msg)
+
 class Client(object):
     def __init__(self, smd, host, username = None, password = None):
         self.smd = smd
@@ -38,10 +42,13 @@ class Client(object):
     def validate_param(self, name, value, type):
         if (type == 'integer'):
             if not isinstance(value, int):
-                raise RpcError('{} needs to be integer'.format(name))
+                raise RpcValidationError('{} needs to be integer'.format(name))
         if (type == 'string'):
             if not isinstance(value, str):
-                raise RpcError('{} needs to be integer'.format(name))
+                raise RpcValidationError('{} needs to be string'.format(name))
+        if (type == 'boolean'):
+            if not isinstance(value, bool):
+                raise RpcValidationError('{} needs to be boolean'.format(name))
 
     def request(self, method, service, args, kwargs):
         unchecked_args = kwargs
