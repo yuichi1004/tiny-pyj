@@ -93,7 +93,6 @@ class Client(object):
                 paramstr =  base64.b64encode(paramstr)
                 payload['params'] = paramstr
             query = urllib.urlencode(payload)
-            print query
             req = urllib2.Request(url + '?' + urllib.urlencode(payload),
                     None, headers)
         else:
@@ -101,6 +100,6 @@ class Client(object):
         resp = self.url_opener.open(req)
         j = json.loads(resp.read())
         if ('error' in j):
-            raise RuntimeError(j['error'])
+            raise RpcError(j['error'])
         return j['result']
 

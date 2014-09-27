@@ -1,0 +1,32 @@
+{
+	"target": "/",
+	"transport": "POST",
+	"services": {
+	    "getStr": {
+	        "parameters": [],
+	        "returns": {"type":"string"}
+	    },
+	    "add": {
+	        "parameters": [
+	            {"type": "integer", "name":"a", "optional":false},
+	            {"type": "integer", "name":"b", "optional":false},
+	            {"type": "integer", "name":"c", "optional":true}
+	        ],
+	        "returns": {"type":"integer"}
+	    },
+	    "sub": {
+	        "transport": "GET",
+	        "parameters": [
+	            {"type": "integer", "name":"a", "optional":false},
+	            {"type": "integer", "name":"b", "optional":false}
+	        ],
+	        "returns": {"type":"integer"}
+	    },
+	    "raiseError": {
+	        "parameters": [
+	        ],
+	        "returns": {"type":"string"}
+	    }
+	}
+}
+
