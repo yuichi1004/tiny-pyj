@@ -77,7 +77,7 @@ class TestServerThread(threading.Thread):
 
 class TinyPyjTest(unittest.TestCase):
     def setUp(self):
-        smd = json.loads(open('./test.smd.json').read())
+        smd = json.loads(open('./smds/test.smd.json').read())
         self.c = tinypyj.Client(smd, 'http://localhost:8000')
     
     def test_call(self):

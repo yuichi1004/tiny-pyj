@@ -1,0 +1,448 @@
+{
+  "target": "/jsonrpc.php",
+  "transport": "POST",
+  "services": {
+    "createProject": {
+      "parameters": [
+        {"name": "name", "type": "string", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getProjectById": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getProjectByName": {
+      "parameters": [
+        {"name": "name", "type": "string", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getAllProjects": {
+      "parameters": [],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "updateProject": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "name", "type": "string", "optional": false}, 
+        {"name": "is_active", "type": "integer", "optional": true}, 
+        {"name": "token", "type": "integer", "optional": true}, 
+        {"name": "is_public", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "removeProject": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "enableProject": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "disableProject": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "enableProjectPublicAccess": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "disableProjectPublicAccess": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false} 
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getAllowedUsers": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "allowUser": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "user_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "revokeUser": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "user_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getColumns": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "getColumn": {
+      "parameters": [
+        {"name": "column_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "moveColumnUp": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "column_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "moveColumnDown": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "column_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "updateColumn": {
+      "parameters": [
+        {"name": "column_id", "type": "integer", "optional": false}, 
+        {"name": "title", "type": "string", "optional": false}, 
+        {"name": "task_limit", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "addColumn": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "title", "type": "string", "optional": false}, 
+        {"name": "task_limit", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "removeColumn": {
+      "parameters": [
+        {"name": "column_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "createTask": {
+      "parameters": [
+        {"name": "title", "type": "string", "optional": false}, 
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "color_id", "type": "integer", "optional": true}, 
+        {"name": "column_id", "type": "integer", "optional": true}, 
+        {"name": "description", "type": "string", "optional": true}, 
+        {"name": "owner_id", "integer": "string", "optional": true}, 
+        {"name": "creator_id", "integer": "string", "optional": true}, 
+        {"name": "score", "type": "integer", "optional": true}, 
+        {"name": "date_due", "type": "string", "optional": true}, 
+        {"name": "category_id", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "updateTask": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "title", "type": "string", "optional": true}, 
+        {"name": "color_id", "type": "integer", "optional": true}, 
+        {"name": "project_id", "type": "integer", "optional": true}, 
+        {"name": "column_id", "type": "integer", "optional": true}, 
+        {"name": "description", "type": "string", "optional": true}, 
+        {"name": "owner_id", "integer": "string", "optional": true}, 
+        {"name": "creator_id", "integer": "string", "optional": true}, 
+        {"name": "score", "type": "integer", "optional": true}, 
+        {"name": "date_due", "type": "string", "optional": true}, 
+        {"name": "category_id", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "openTask": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "closeTask": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "removeTask": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "moveTaskPosition": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "task_id", "type": "integer", "optional": false}, 
+        {"name": "column_id", "type": "integer", "optional": false}, 
+        {"name": "position", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getAllTasks": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}, 
+        {"name": "status", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "getTask": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "createUser": {
+      "parameters": [
+        {"name": "username", "type": "string", "optional": false}, 
+        {"name": "password", "type": "string", "optional": false}, 
+        {"name": "name", "type": "string", "optional": true}, 
+        {"name": "email", "type": "string", "optional": true}, 
+        {"name": "is_admin", "type": "integer", "optional": true}, 
+        {"name": "default_project_id", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "updateUser": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "username", "type": "string", "optional": false}, 
+        {"name": "password", "type": "string", "optional": false}, 
+        {"name": "name", "type": "string", "optional": true}, 
+        {"name": "email", "type": "string", "optional": true}, 
+        {"name": "is_admin", "type": "integer", "optional": true}, 
+        {"name": "default_project_id", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "removeUser": {
+      "parameters": [
+        {"name": "user_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getUser": {
+      "parameters": [
+        {"name": "user_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getAllUsers": {
+      "parameters": [
+      ],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "createCategory": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "updateCategory": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "name", "type": "string", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "removeCategory": {
+      "parameters": [
+        {"name": "category_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getCategory": {
+      "parameters": [
+        {"name": "category_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getAllCategory": {
+      "parameters": [
+        {"name": "project_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "createComment": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}, 
+        {"name": "user_id", "type": "integer", "optional": false}, 
+        {"name": "content", "type": "string", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "updateComment": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "content", "type": "string", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getComment": {
+      "parameters": [
+        {"name": "comment_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "removeComment": {
+      "parameters": [
+        {"name": "comment_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "getAllComments": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "array"
+      }
+    },
+    "createSubtask": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}, 
+        {"name": "title", "type": "string", "optional": false}, 
+        {"name": "assignee_id", "type": "integer", "optional": true}, 
+        {"name": "time_estimated", "type": "integer", "optional": true}, 
+        {"name": "time_spent", "type": "integer", "optional": true}, 
+        {"name": "status", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "updateSubtask": {
+      "parameters": [
+        {"name": "id", "type": "integer", "optional": false}, 
+        {"name": "task_id", "type": "integer", "optional": false}, 
+        {"name": "title", "type": "string", "optional": true}, 
+        {"name": "assignee_id", "type": "integer", "optional": true}, 
+        {"name": "time_estimated", "type": "integer", "optional": true}, 
+        {"name": "time_spent", "type": "integer", "optional": true}, 
+        {"name": "status", "type": "integer", "optional": true}
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "removeSubtask": {
+      "parameters": [
+        {"name": "subtask_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getSubtask": {
+      "parameters": [
+        {"name": "subtask_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "object"
+      }
+    },
+    "getAllSubtasks": {
+      "parameters": [
+        {"name": "task_id", "type": "integer", "optional": false}
+      ],
+      "returns": {
+        "type": "array"
+      }
+    }
+  }
+}
