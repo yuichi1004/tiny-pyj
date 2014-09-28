@@ -30,9 +30,6 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         return None
 
     def do_POST(self):
-        self.send_response(200)
-        self.send_header('ContentType', 'application/json')
-        self.end_headers()
         clen = int(self.headers['content-length'])
         reqbody = self.rfile.read(clen)
         reqjson = json.loads(reqbody)
@@ -41,13 +38,15 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         y = self.handle_method(reqjson['method'], reqjson['params'])
         respjson = dict(list(x.items()) + list(y.items()))
 
+        if 'error' in respjson:
+            self.send_response(500)
+        else:
+            self.send_response(200)
+        self.send_header('ContentType', 'application/json')
+        self.end_headers()
         self.wfile.write(json.dumps(respjson))
 
     def do_GET(self):
-        self.send_response(200)
-        self.send_header('ContentType', 'application/json')
-        self.end_headers()
-        
         query = urlparse.urlparse(self.path).query
         query_params = urlparse.parse_qs(query)
         params ={}
@@ -57,7 +56,13 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         x = {'jsonrpc':'2.0', 'id': query_params['id'][0]}
         y = self.handle_method(query_params['method'][0], params)
         respjson = dict(list(x.items()) + list(y.items()))
-
+    
+        if 'error' in respjson:
+            self.send_response(500)
+        else:
+            self.send_response(200)
+        self.send_header('ContentType', 'application/json')
+        self.end_headers()
         self.wfile.write(json.dumps(respjson))
 
     def log_message(self, *args):

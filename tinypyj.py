@@ -97,7 +97,11 @@ class Client(object):
                     None, headers)
         else:
             raise RpcError('Unknown transport: ' + transport)
-        resp = self.url_opener.open(req)
+        resp = None
+        try:
+            resp = self.url_opener.open(req)
+        except urllib2.URLError, e:
+            resp = e
         j = json.loads(resp.read())
         if ('error' in j):
             raise RpcError(j['error'])
